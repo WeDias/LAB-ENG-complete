@@ -1,3 +1,3 @@
 from .base import base
-from .log import Log
-from .operation_type import OperationType
+from .log_model import LogModel
+from .operation_type_model import OperationTypeModel
