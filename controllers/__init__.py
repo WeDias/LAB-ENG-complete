@@ -1,1 +1,2 @@
-from .index import index
+from .logs import logs
+from .calculadora import calculadora
