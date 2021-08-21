@@ -10,6 +10,3 @@ app.register_blueprint(index)
 base.init_app(app)
 with app.app_context():
     base.create_all()
-
-if __name__ == '__main__':
-    app.run()
