@@ -2,31 +2,57 @@
 <html lang="pt-br">
   <head>
     <meta charset="utf-8">
-    <title>Teste</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static', filename='css/menu.css')}}">
-    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static', filename='css/logs.css')}}">
+    <title>LAB-ENG - Logs</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/logs.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet"> 
   </head>
   <body>
-
-    <!-- Menu -->
-    <div class="sidebar">
-      <a href="calculadora" id="calculadora"><i class="fa fa-fw fa-calculator"></i> CALCULADORA</a>
-      <a href="#" id="logs"><i class="fa fa-fw fa-file"></i> VER LOGS</a>
-    </div>
-
-    <!-- Área logs -->
-    <div class="main">
-      <div class="logs">
-        <h1>TABELA DE LOGS</h1>
-        <form action="">
-          
-        </form>
+    <div class="menu">
+      <div class="sidebar">
+        <a href="calculadora" id="calculadora"><i class="fa fa-fw fa-calculator"></i> CALCULADORA</a>
+        <a href="#" id="logs"><i class="fa fa-fw fa-file"></i> VER LOGS</a>
+      </div>
+      <div class="main">
+        <div class="logs">
+          <h1>TABELA DE LOGS</h1>
+          <input id="pesquisar" type="text" placeholder="Pesquisar">
+          <table>
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>DATA</td>
+                <td>TIPO OPERAÇÃO</td>
+                <td>OPERAÇÃO</td>
+              </tr>
+            </thead>
+            <tbody id="logTable">
+              {% for log, optype in data %}
+              <tr>
+                <td class="c1">{{log.log_id}}</td>
+                <td class="c2">{{log.log_date}}</td>
+                <td class="c3">{{optype.opt_name}}</td>
+                <td class="c4">{{log.log_args_op}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>            
+        </div>
       </div>
     </div>
-
+    <script>
+      $(document).ready(function(){
+        $("#pesquisar").on("keyup", function() {
+          let value = $(this).val().toLowerCase();
+          $("#logTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          })
+        })
+      })
+    </script>
   </body>
 </html>

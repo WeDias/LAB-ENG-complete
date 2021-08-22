@@ -1,3 +1,32 @@
 #logs {
     color: #6e97e4;
 }
+
+#pesquisar {
+    width: 500px;   
+    margin-right: 900px;
+}
+
+table {
+    margin: 0 auto; 
+    border-collapse: collapse;
+}
+
+thead {
+    color: #fff;
+    background: #6e97e4;
+    display: block;
+}
+
+th, td {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    width: 350px;
+    box-sizing: border-box;
+}
+
+tbody {
+    height: 600px;
+    overflow-y: scroll;
+    display: block;
+}

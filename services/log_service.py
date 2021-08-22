@@ -17,7 +17,6 @@ def post_log():
         base.session.add(new_log)
         base.session.commit()
     except Exception as error:
-        print(error)
         return {'status': 500, 'error': 'Ocorreu um erro ao processar a requisição'}
     else:
         return {'status': 200, 'success': True}
