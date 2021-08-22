@@ -13,15 +13,18 @@ before_script:
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
-  - pip install requirements.txt
+  - pip install -r requirements.txt
 
 test:
   script:
     - pytest
 
-run:
+deploy:
   script:
-    - gunicorn --bind 0.0.0.0:5001 --chdir services elementary_service:app
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=elementary-service-py --api-key=$HEROKU_DEPLOY_API_KEY
 
   artifacts:
     paths:
