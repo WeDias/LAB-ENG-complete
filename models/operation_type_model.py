@@ -3,7 +3,7 @@ from models import base
 
 class OperationTypeModel(base.Model):
 
-    __table_name__ = 'operation_type'
+    __tablename__ = 'operation_type'
     opt_id = base.Column(base.Integer, primary_key=True, autoincrement=True)
     opt_name = base.Column(base.String(80), nullable=False, unique=True)
 

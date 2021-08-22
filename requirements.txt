@@ -1,5 +1,6 @@
 click==8.0.1
 Flask==2.0.1
+Flask-Cors==3.0.10
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.1
 gunicorn==20.1.0
@@ -8,5 +9,6 @@ itsdangerous==2.0.1
 Jinja2==3.0.1
 mariadb==1.0.7
 MarkupSafe==2.0.1
+six==1.16.0
 SQLAlchemy==1.4.22
 Werkzeug==2.0.1

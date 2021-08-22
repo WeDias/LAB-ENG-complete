@@ -1,12 +1,14 @@
 from flask import Flask, request
+from flask_cors import cross_origin
 
 
 app = Flask(__name__)
 app.config.from_object('config')
 
 
-@app.route('/elementary', methods=['GET'])
-def get_result():
+@app.route('/elementary', methods=['POST'])
+@cross_origin()
+def post_result():
     try:
         result = eval(f'{request.form["value1"]} {request.form["operator"]} {request.form["value2"]}')
     except Exception as error:

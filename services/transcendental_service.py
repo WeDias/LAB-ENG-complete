@@ -1,13 +1,15 @@
 from math import cos
 from flask import Flask, request
+from flask_cors import cross_origin
 
 
 app = Flask(__name__)
 app.config.from_object('config')
 
 
-@app.route('/transcendental', methods=['GET'])
-def get_result():
+@app.route('/transcendental', methods=['POST'])
+@cross_origin()
+def post_result():
     try:
         result = cos(float(request.form["value1"]))
     except Exception as error:

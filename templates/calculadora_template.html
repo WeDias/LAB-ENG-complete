@@ -2,7 +2,8 @@
 <html lang="pt-br">
   <head>
     <meta charset="utf-8">
-    <title>Teste</title>
+    <title>LAB-ENG - Calculadora</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{url_for('static', filename='css/menu.css')}}">
     <link rel= "stylesheet" type= "text/css" href= "{{url_for('static', filename='css/calculadora.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,22 +12,86 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet"> 
   </head>
   <body>
-
-    <!-- Menu -->
-    <div class="sidebar">
-      <a href="#" id="calculadora"><i class="fa fa-fw fa-calculator"></i> CALCULADORA</a>
-      <a href="logs" id="logs"><i class="fa fa-fw fa-file"></i> VER LOGS</a>
-    </div>
-
-    <!-- Área calculadora -->
-    <div class="main">
-      <div class="calculadora">
-        <h1>CALCULADORA</h1>
-        <form action="">
-          
-        </form>
+    <div class="menu">
+      <div class="sidebar">
+        <a href="#" id="calculadora"><i class="fa fa-fw fa-calculator"></i> CALCULADORA</a>
+        <a href="logs" id="logs"><i class="fa fa-fw fa-file"></i> VER LOGS</a>
+      </div>
+      <div class="main">
+        <div class="calculadora">
+          <h1>CALCULADORA</h1>
+          <form>
+            <div class="inputs">
+              <input id="value1" type="number" name="value1" value="0"></input>
+              <select id="operator" name="operator">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+                <option value="**">**</option>
+                <option value="//">//</option>
+                <option value="%">%</option>
+                <option value="cos">cos(x)</option>
+              </select>
+              <input id="value2" type="number" name="value2" value="0"></input> = 
+              <input id="result" type="number" name="result" value="0" disabled></input>
+            </div>
+            <div>
+              <button id="elementary">Calcular</button> 
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+    <script>
+      $("#operator").change(function() {
+          if (this.value === "cos") {
+            $("#value2").hide()
+          } else {
+            $("#value2").show()
+          }
+      })
 
+      // Realização do cálculo
+      $("#elementary").click(function(e) {
+        e.preventDefault()
+
+        let value1 = $("#value1").val()
+        let value2 = $("#value2").val()
+        let operator = $("#operator").val()
+
+        let id
+        let url
+        let args
+
+        if ($("#operator").val() !== "cos") {
+          id = 1;
+          url = "http://localhost:5001/elementary"
+          args = `${value1} ${operator} ${value2}`
+        } else {
+          id = 2;
+          url = "http://localhost:5002/transcendental"
+          args = `cos(${value1})`
+        }
+
+        $.ajax({
+          url: url,
+          type: "post",
+          data: {value1: value1, operator: operator, value2: value2},
+          success: function(response) {
+            $("#result").val(response.result)
+
+            // Geração do log
+            $.ajax({
+              url: "http://localhost:5003/log",
+              type: "post",
+              data: {id: id, args: `${args} = ${response.result}`},
+            })
+
+          },
+        })
+      })
+
+    </script>
   </body>
 </html>
