@@ -1,8 +1,8 @@
 image: python:latest
 
 stages:
-  - deploy
   - test
+  - deploy
 
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
