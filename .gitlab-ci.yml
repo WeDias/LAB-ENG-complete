@@ -1,0 +1,28 @@
+image: python:latest
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+
+before_script:
+  - python -V
+  - pip install virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
+  - pip install requirements.txt
+
+test:
+  script:
+    - pytest
+
+run:
+  script:
+    - gunicorn --bind 0.0.0.0:5001 --chdir services elementary_service:app
+
+  artifacts:
+    paths:
+      - dist/*.whl
