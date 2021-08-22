@@ -1,5 +1,9 @@
 image: python:latest
 
+stages:
+  - deploy
+  - test
+
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
@@ -9,23 +13,24 @@ cache:
     - venv/
 
 before_script:
-  - python -V
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
-  - pip install -r requirements.txt
+  - pip install flask
+  - pip install Flask-Cors
 
-test:
+pytest:
+  stage: test
   script:
     - pytest
 
-deploy:
+production:
+  stage: deploy
   script:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=elementary-service-py --api-key=$HEROKU_DEPLOY_API_KEY
-
   artifacts:
     paths:
       - dist/*.whl
