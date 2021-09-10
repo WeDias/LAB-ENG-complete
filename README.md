@@ -14,11 +14,15 @@ Como executar a aplicação e todos os serviços (Linux / Bash):
 ```bash
   git clone https://github.com/WeDias/LAB-ENG-complete.git
 ```
-2. O comando abaixo instala todas as dependências do projeto cria uma venv, caso necessário, e executa a aplicação: 
+2. Entrar no diretório LAB-ENG-complete com: 
+```bash
+  cd LAB-ENG-complete/
+```
+3. O comando abaixo instala todas as dependências do projeto cria uma venv, caso necessário, e executa a aplicação: 
 ```bash
   . execute.sh
 ```
-3. Acessar o link no navegador: 
+4. Acessar o link no navegador: 
 ```bash
   http://localhost:5000
 ```
