@@ -7,9 +7,11 @@ Descrição das pastas:
 * services: pasta com serviços de log, elementar e transcendental
 * static: pasta com arquivos estáticos js, css, e imgs
 * templates: pasta com todos os templates (views) da aplicação
-* tests: pasta contendo testes unitários  
+* tests: pasta contendo testes unitários
 
-Como executar a aplicação e todos os serviços (Linux / Bash):
+Como executar a aplicação e todos os serviços (Linux / Bash):  
+[Clique aqui para assistir o vídeo](https://youtu.be/iKM-SiGW51o)  
+
 1. Clonar o repositório com: 
 ```bash
   git clone https://github.com/WeDias/LAB-ENG-complete.git
