@@ -10,7 +10,6 @@ Descrição das pastas:
 * tests: pasta contendo testes unitários
 
 Como executar a aplicação e todos os serviços (Linux / Bash):  
-[Clique aqui para assistir o vídeo](https://youtu.be/iKM-SiGW51o)  
 
 1. Clonar o repositório com: 
 ```bash
